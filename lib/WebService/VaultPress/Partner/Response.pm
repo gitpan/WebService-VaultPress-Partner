@@ -1,10 +1,9 @@
 package WebService::VaultPress::Partner::Response;
-BEGIN {
-  $WebService::VaultPress::Partner::Response::VERSION = '0.01.00';
-}
-use warnings;
-use strict;
 use Moose;
+use namespace::autoclean;
+
+our $VERSION = '0.02';
+$VERSION = eval $VERSION;
 
 has is_success  => ( is => 'ro', isa => 'Str', required => 1 );
 has api_call    => ( is => 'ro', isa => 'Str' );

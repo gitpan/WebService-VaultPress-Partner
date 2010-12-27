@@ -1,10 +1,9 @@
 package WebService::VaultPress::Partner::Request::Usage;
-BEGIN {
-  $WebService::VaultPress::Partner::Request::Usage::VERSION = '0.01.00';
-}
-use strict;
-use warnings;
 use Moose;
+use namespace::autoclean;
+
+our $VERSION = '0.02';
+$VERSION = eval $VERSION;
 
 has api => (
     is       => 'ro',
@@ -144,6 +143,6 @@ LICENSE file included in this package for more detailed information.
 =head1 AVAILABILITY
 
 The latest version of this software is available through GitHub at
-https://github.com/mediatemple/webservice-vaultpress-partner/
+https://github.com/mediatemple/webservice/vaultpress-partner/
 
 =cut

@@ -1,10 +1,13 @@
 package WebService::VaultPress::Partner::Request::History;
-BEGIN {
-  $WebService::VaultPress::Partner::Request::History::VERSION = '0.01.00';
-}
-use strict;
-use warnings;
 use Moose;
+use Moose::Util::TypeConstraints;
+use namespace::autoclean;
+
+our $VERSION = '0.02';
+$VERSION = eval $VERSION;
+
+my $abs_int     = subtype as 'Int', where { $_ >= 0 };
+my $limited_int = subtype as 'Int', where { $_ >= 1 and $_ <= 500  };
 
 has api => (
     is       => 'ro',
@@ -14,25 +17,14 @@ has api => (
 
 has limit => (
     is       => 'ro',
-    isa      => 'Int',
+    isa      => $limited_int,
     default  => 100,
-    trigger  => sub {
-        my ( $self ) = @_;
-        die __PACKAGE__ . "->limit( " . $self->limit . " ) MUST be 1-500" 
-            unless ( $self->limit >= 1 and $self->limit <= 500 );
-
-    }
 );
 
 has offset => (
     is       => 'ro',
-    isa      => 'Int',
+    isa      => $abs_int,
     default  => 0,
-    trigger  => sub {
-        my ( $self ) = @_;
-        die __PACKAGE__ . "->offset(" . $self->offset . ") MUST be >= 0"
-            unless $self->offset >= 0;
-    }
 );
 
 __PACKAGE__->meta->make_immutable;
@@ -219,6 +211,6 @@ LICENSE file included in this package for more detailed information.
 =head1 AVAILABILITY
 
 The latest version of this software is available through GitHub at
-https://github.com/mediatemple/webservice-vaultpress-partner/
+https://github.com/mediatemple/webservice/vaultpress-partner/
 
 =cut
