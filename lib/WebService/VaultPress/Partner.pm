@@ -11,7 +11,7 @@ use Moose::Util::TypeConstraints;
 
 my $abs_int = subtype as 'Int', where { $_ >= 0 };
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 $VERSION = eval $VERSION;
 
 my %cache;
@@ -43,10 +43,10 @@ has _ua => (
 no Moose;
 
 # CamelCase linking to Perly methods.
-*CreateGoldenTicket     = *create_golden_ticket;
-*GetUsage               = *get_usage;
-*GetHistory             = *get_history;
-*GetRedeemedHistory     = *get_redeemed_history;
+sub CreateGoldenTicket { shift->create_golden_ticket(@_) }
+sub GetUsage           { shift->get_usage(@_) }
+sub GetHistory         { shift->get_history(@_) }
+sub GetRedeemedHistory { shift->get_redeemed_history(@_) }
 
 sub create_golden_ticket {
     my ( $self, %request ) = @_;
@@ -59,7 +59,7 @@ sub create_golden_ticket {
             key   => $self->key,
             email => $req->email,
             fname => $req->fname,
-            lname => $req->fname,
+            lname => $req->lname,
         },
     );
 
@@ -173,7 +173,7 @@ WebService::VaultPress::Partner - The VaultPress Partner API Client
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
